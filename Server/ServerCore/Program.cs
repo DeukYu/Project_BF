@@ -6,24 +6,11 @@ namespace ServerCore
 {
     class Program
     {
-        static void Main(string[] args)
+        static Listener _listener = new Listener();
+        static void OnAcceptHandler(Socket clientSocket)
         {
-            string host = Dns.GetHostName();
-            IPHostEntry ipHost = Dns.GetHostEntry(host);
-            IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
-
-            Socket listenSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            listenSocket.Bind(endPoint);
-            listenSocket.Listen(10);
-           
-            while(true)
+            try
             {
-                Console.WriteLine("Listening...");
-
-                Socket clientSocket = listenSocket.Accept();
-
                 byte[] recvBuff = new byte[1024];
                 int recvBytes = clientSocket.Receive(recvBuff);
                 string recvData = Encoding.UTF8.GetString(recvBuff, 0, recvBytes);
@@ -35,6 +22,23 @@ namespace ServerCore
                 //
                 clientSocket.Shutdown(SocketShutdown.Both);
                 clientSocket.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        static void Main(string[] args)
+        {
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+            _listener.Init(endPoint, OnAcceptHandler);
+            Console.WriteLine("Listening...");
+            while (true)
+            {
             }
         }
     }
