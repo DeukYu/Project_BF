@@ -13,7 +13,9 @@ public class Managers : MonoBehaviour
     // 시스템 코어 관련
     #region Core
     DataManager _dataManager = new DataManager();
+    ResourceManager _resourceManager = new ResourceManager();
     public static DataManager Data { get { return Instance._dataManager; } }
+    public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
     #endregion
     void Start()
     {
