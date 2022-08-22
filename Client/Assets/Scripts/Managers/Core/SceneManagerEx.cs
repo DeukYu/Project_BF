@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class SceneManagerEx : MonoBehaviour
+public class SceneManagerEx
 {
-    // Start is called before the first frame update
-    void Start()
+    public BaseScene CurrentScene { get { return GameObject.FindObjectOfType<BaseScene>(); } }
+    public void LoadScene(Define.Scene type)
     {
-        
+        Managers.Clear();
+        CurrentScene.Clear();
+        SceneManager.LoadScene(GetSceneName(type));
     }
-
-    // Update is called once per frame
-    void Update()
+    string GetSceneName(Define.Scene type)
     {
-        
+        return System.Enum.GetName(typeof(Define.Scene), type);
+    }
+    public void Clear()
+    {
+        CurrentScene.Clear();
     }
 }
