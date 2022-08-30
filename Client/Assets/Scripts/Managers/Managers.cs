@@ -13,17 +13,9 @@ public class Managers : MonoBehaviour
     // 시스템 코어 관련
     #region Core
     DataManager _dataManager = new DataManager();
-    InputManager _inputManager = new InputManager();
     ResourceManager _resourceManager = new ResourceManager();
-    SceneManagerEx _sceneManager = new SceneManagerEx();
-    SoundManager _soundManager = new SoundManager();
-    UIManager   _uiManager = new UIManager();
     public static DataManager Data { get { return Instance._dataManager; } }
-    public static InputManager Input { get { return Instance._inputManager; } }
-    public static ResourceManager Resource { get { return Instance._resourceManager; } }
-    public static SceneManagerEx Scene { get { return Instance._sceneManager; } }
-    public static SoundManager Sound { get { return Instance._soundManager; } }
-    public static UIManager UI { get { return Instance._uiManager; } }
+    public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
     #endregion
     void Start()
     {
@@ -51,13 +43,10 @@ public class Managers : MonoBehaviour
 
             // TODO : 각 매니저 초기화
             s_instance._dataManager.Init();
-            s_instance._soundManager.Init();
         }
     }
     public static void Clear()
     {
-        Input.Clear();
-        Sound.Clear();
-        Scene.Clear();
+
     }
 }
