@@ -13,9 +13,13 @@ public class Managers : MonoBehaviour
     // 시스템 코어 관련
     #region Core
     DataManager _dataManager = new DataManager();
+    InputManager _inputManager = new InputManager();
     ResourceManager _resourceManager = new ResourceManager();
+    SceneManagerEx _scene = new SceneManagerEx();
     public static DataManager Data { get { return Instance._dataManager; } }
-    public static ResourceManager ResourceManager { get { return Instance._resourceManager; } }
+    public static InputManager Input { get { return Instance._inputManager; } }
+    public static ResourceManager Resource { get { return Instance._resourceManager; } }
+    public static SceneManagerEx Scene { get { return Instance._scene; } }
     #endregion
     void Start()
     {
@@ -47,6 +51,7 @@ public class Managers : MonoBehaviour
     }
     public static void Clear()
     {
-
+        Input.Clear();
+        Scene.Clear();
     }
 }
