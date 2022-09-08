@@ -12,8 +12,9 @@ public class LoginScene : BaseScene
     }
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
         {
+            System.Console.WriteLine("Mouse Button Down");
             Managers.Scene.LoadScene(Define.Scene.Lobby);
         }
     }
